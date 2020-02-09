@@ -7,23 +7,23 @@
     tools:context=".MainActivity">
 
 
-    <Button
+    <Switch
         android:id="@+id/auto_mode_btn"
         android:layout_width="130dp"
         android:layout_height="50dp"
         android:layout_marginStart="56dp"
         android:layout_marginTop="50dp"
-        android:text="auto mode"
+        android:text="Auto Mode"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <Switch
         android:id="@+id/motor_state_btn"
         android:layout_width="130dp"
         android:layout_height="50dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="56dp"
-        android:text="motor state"
+        android:text="Motor State"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

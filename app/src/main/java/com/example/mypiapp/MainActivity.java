@@ -3,8 +3,11 @@ package com.example.mypiapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -25,14 +28,49 @@ public class MainActivity extends AppCompatActivity {
         final DatabaseReference dVhandServo = database.getReference("VerticalHandServo");
         final DatabaseReference dHhandServo = database.getReference("HorizontalHandServo");
 
+        final DatabaseReference dAutoMode = database.getReference("AutoMode");
+        final DatabaseReference dMotorState = database.getReference("MotorState");
+
         SeekBar BoatServo = (SeekBar) findViewById(R.id.boat_servo);
         SeekBar DiskServo = (SeekBar) findViewById(R.id.disk_servo);
         SeekBar GripServo = (SeekBar) findViewById(R.id.grip_servo);
         SeekBar VhandServo = (SeekBar) findViewById(R.id.v_hand_servo);
         SeekBar HhandServo = (SeekBar) findViewById(R.id.h_hand_servo);
 
-        Button AutoMode = (Button) findViewById(R.id.auto_mode_btn);
-        Button MotorState = (Button) findViewById(R.id.motor_state_btn);
+        Switch AutoMode = (Switch) findViewById(R.id.auto_mode_btn);
+        Switch MotorState = (Switch) findViewById(R.id.motor_state_btn);
+
+        AutoMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    //Do something when Switch button is on/checked
+                    dAutoMode.setValue(1);
+                }
+                else
+                {
+                    //Do something when Switch is off/unchecked
+                    dAutoMode.setValue(0);
+                }
+            }
+        });
+
+        MotorState.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    //Do something when Switch button is on/checked
+                    dMotorState.setValue(1);
+                }
+                else
+                {
+                    //Do something when Switch is off/unchecked
+                    dMotorState.setValue(0);
+                }
+            }
+        });
 
         BoatServo.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
