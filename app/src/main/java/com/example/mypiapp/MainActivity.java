@@ -5,6 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,6 +16,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        final DatabaseReference dBoatServo = database.getReference("BoatServo");
+        final DatabaseReference dDiskServo = database.getReference("DiskServo");
+        final DatabaseReference dGripServo = database.getReference("GripServo");
+        final DatabaseReference dVhandServo = database.getReference("VerticalHandServo");
+        final DatabaseReference dHhandServo = database.getReference("HorizontalHandServo");
 
         SeekBar BoatServo = (SeekBar) findViewById(R.id.boat_servo);
         SeekBar DiskServo = (SeekBar) findViewById(R.id.disk_servo);
@@ -21,5 +33,96 @@ public class MainActivity extends AppCompatActivity {
 
         Button AutoMode = (Button) findViewById(R.id.auto_mode_btn);
         Button MotorState = (Button) findViewById(R.id.motor_state_btn);
+
+        BoatServo.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                Toast.makeText(MainActivity.this, "Boat Servo value "+progress, Toast.LENGTH_SHORT).show();
+                dBoatServo.setValue(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                //Toast.makeText(MainActivity.this, "Seekbar touch started", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                //Toast.makeText(MainActivity.this, "Seekbar touch stopped", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        DiskServo.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                Toast.makeText(MainActivity.this, "Disk Servo value "+progress, Toast.LENGTH_SHORT).show();
+                dDiskServo.setValue(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        GripServo.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                Toast.makeText(MainActivity.this, "Grip Servo value "+progress, Toast.LENGTH_SHORT).show();
+                dGripServo.setValue(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        HhandServo.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                Toast.makeText(MainActivity.this, "Horizontal Servo value "+progress, Toast.LENGTH_SHORT).show();
+                dHhandServo.setValue(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        VhandServo.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                Toast.makeText(MainActivity.this, "Vertical Servo value "+progress, Toast.LENGTH_SHORT).show();
+                dVhandServo.setValue(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
     }
 }
